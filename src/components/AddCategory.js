@@ -1,39 +1,44 @@
-// src/components/AddCategory.js
 import React, { useState } from 'react';
-import { createCategory } from '../services/categoryApi.js';
+import { createCategory } from '../services/categoryApi.js'; // Import createCategory function
 
-const AddCategory = () => {
+const AddCategory = ({ onAddCategory }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const newCategory = { name, description };
-    await createCategory(newCategory);
+    const newCategory = { name, description };  
+    console.log('Submitting category:', newCategory);
+    onAddCategory(newCategory);
     setName('');
     setDescription('');
-  };
+    } 
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Name:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Description:</label>
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <button type="submit">Add Category</button>
-    </form>
+    <div className="d-flex flex-row p-1">
+      <form onSubmit={handleSubmit}>
+        <h1>Add New Category</h1>
+        <div>
+          <label>Name:</label>
+          <input
+            type="text"
+            value={name}
+            className="admin-input"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Description:</label>
+          <input
+            type="text"
+            value={description}
+            className="admin-input"
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="btn category-btn btn-primary">Add Category</button>
+      </form>
+    </div>
   );
 };
 

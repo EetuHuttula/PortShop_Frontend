@@ -1,0 +1,26 @@
+.admin-dashboard {
+    padding: 20px;
+  }
+  
+  .admin-dashboard-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .admin-dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .admin-dashboard-section {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .admin-dashboard-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  

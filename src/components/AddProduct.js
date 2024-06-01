@@ -1,27 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { createProduct } from '../services/productApi.js';
-import { getCategories } from '../services/categoryApi.js';
+import React, { useState } from 'react';
 
-const AddProduct = () => {
+const AddProduct = ({ categories, onAddProduct }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
-  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const result = await getCategories();
-      setCategories(result);
-    };
-
-    fetchCategories();
-  }, []);
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const newProduct = { name, description, price, category };
-    await createProduct(newProduct);
+    console.log('Submitting product:', newProduct);
+    onAddProduct(newProduct);
     setName('');
     setDescription('');
     setPrice('');
@@ -29,50 +18,52 @@ const AddProduct = () => {
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <h2>Add New Product</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Price:</label>
-          <input
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Category:</label>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="">Select a category</option>
-            {categories.map((cat) => (
-              <option key={cat._id} value={cat._id}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <button type="submit">Add Product</button>
-      </form>
-    </div>
+      <div>
+        <label>Name:</label>
+        <input
+          type="text"
+          value={name}
+          className="admin-input"
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Description:</label>
+        <input
+          type="text"
+          value={description}
+          className="admin-input"
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Price:</label>
+        <input
+          type="number"
+          value={price}
+          className="admin-input"
+          onChange={(e) => setPrice(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Category:</label>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="admin-input"
+        >
+          <option value="">Select a category</option>
+          {categories.map((cat) => (
+            <option key={cat._id} value={cat.id}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button type="submit" className="btn btn-primary">Add Product</button>
+    </form>
   );
 };
 
