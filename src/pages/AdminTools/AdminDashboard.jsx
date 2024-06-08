@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddCategory from '../../components/AddCategory';
 import AddProduct from '../../components/AddProduct';
 import CategoryList from '../../components/CategoryList'
-import ProductsList from '../../components/ProductsList';  // Make sure the import path is correct
+import ProductsList from '../../components/ProductsList';
 import { getProducts, createProduct, deleteProduct, updateProduct } from '../../services/productApi';
 import { getCategories, deleteCategory, createCategory, updateCategory } from '../../services/categoryApi';
 import './AdminDashboard.css'
@@ -90,6 +90,7 @@ export default function AdminDashboard() {
 
 
   return (
+    <>
     <div className="admin-dashboard">
     <h1 className="admin-dashboard-title">Admin Dashboard</h1>
     <div className="admin-dashboard-content">
@@ -111,5 +112,6 @@ export default function AdminDashboard() {
       </div>
     </div>
   </div>
+  </>
   );
 }

@@ -5,20 +5,28 @@ const AddProduct = ({ categories, onAddProduct }) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [image, setImage] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newProduct = { name, description, price, category };
-    console.log('Submitting product:', newProduct);
-    onAddProduct(newProduct);
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('category', category);
+    formData.append('image', image);
+
+    console.log('Submitting product:', formData);
+    onAddProduct(formData);
     setName('');
     setDescription('');
     setPrice('');
     setCategory('');
+    setImage(null);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       <h2>Add New Product</h2>
       <div>
         <label>Name:</label>
@@ -61,6 +69,15 @@ const AddProduct = ({ categories, onAddProduct }) => {
             </option>
           ))}
         </select>
+      </div>
+      <div>
+        <label>Image:</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+          className="admin-input"
+        />
       </div>
       <button type="submit" className="btn btn-primary">Add Product</button>
     </form>

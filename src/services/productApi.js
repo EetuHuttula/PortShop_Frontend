@@ -5,10 +5,18 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3001/api';
 
 export const getProducts = async () => {
-  const response = await axios.get(`${API_URL}/products`);
-  return response.data;
+  try {
+    const response = await axios.get(`${API_URL}/products`);
+    const productsWithImages = await Promise.all(response.data.map(async product => {
+      const imageUrl = product.imageUrl ? `${API_URL}/${product.imageUrl}` : null;
+      return { ...product, imageUrl };
+    }));
+    return productsWithImages;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
 };
-
 export const getProduct = async (id) => {
   const response = await axios.get(`${API_URL}/products/${id}`);
   return response.data;
