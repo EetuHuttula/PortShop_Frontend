@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './button.css' 
 
 const CategoriesList = ({ categories, onDeleteCategory, onUpdateCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -35,8 +36,8 @@ const CategoriesList = ({ categories, onDeleteCategory, onUpdateCategory }) => {
         {categories.map(category => (
           <li key={category.id}>
             {category.name}
-            <button className="btn btn-danger" onClick={() => onDeleteCategory(category.id)}>Delete</button>
-            <button className="btn btn-warning" onClick={() => handleShowModal(category)}>Update</button>
+            <button className="btn btn-danger edit-button" onClick={() => onDeleteCategory(category.id)}>Delete</button>
+            <button className="btn btn-warning edit-button" onClick={() => handleShowModal(category)}>Update</button>
           </li>
         ))}
       </ul>

@@ -16,6 +16,7 @@
   
   #hero-container {
     background-color: rgba(170, 1, 1, 0.986) !important;
+    height: 90vh;
     background: linear-gradient(
       -50deg,
       transparent 35%,
@@ -27,7 +28,7 @@
       rgba(0, 0, 0, 0.055)
     );
     background-size: 10px 10px;
-    box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.1), inset 0 -50px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.1), inset 0 -70px 30px rgba(0, 0, 0, 0.1);
   }
   
 

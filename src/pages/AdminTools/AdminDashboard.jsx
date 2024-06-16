@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import AddCategory from '../../components/AddCategory';
-import AddProduct from '../../components/AddProduct';
-import CategoryList from '../../components/CategoryList'
-import ProductsList from '../../components/ProductsList';
+import AddCategory from '../../components/serviceHelpers/AddCategory';
+import AddProduct from '../../components/serviceHelpers/AddProduct';
+import CategoryList from '../../components/serviceHelpers/CategoryList'
+import ProductsList from '../../components/serviceHelpers/ProductsList';
 import { getProducts, createProduct, deleteProduct, updateProduct } from '../../services/productApi';
 import { getCategories, deleteCategory, createCategory, updateCategory } from '../../services/categoryApi';
 import './AdminDashboard.css'
