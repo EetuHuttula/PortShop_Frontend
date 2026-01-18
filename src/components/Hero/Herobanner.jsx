@@ -5,15 +5,17 @@ import { Link } from 'react-router-dom';
 
 export default function Herobanner() {
   return (
-    <div className="container-fluid d-flex justify-content-center align-items-center" id="hero-container">
-      <div className="image-container col-5">
-        <img src={heroimg} alt="heroimage" className="hero-img" />
-       
-      </div> 
-      <div className="hero-text col-5">
-          <h1>We offer fair prices!</h1>
-          <Link to="/" className="custom-link">Check our products</Link>
+    <div className="hero-section">
+      <div className="hero-content">
+        <div className="hero-text">
+          <h1>Premium Laptops</h1>
+          <p>Quality devices at unbeatable prices</p>
+          <Link to="/" className="hero-button">Shop Now</Link>
         </div>
+        <div className="hero-image">
+          <img src={heroimg} alt="laptop" className="hero-img" />
+        </div>
+      </div>
     </div>
   );
 }
