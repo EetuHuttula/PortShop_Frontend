@@ -14,15 +14,15 @@ const Footer = () => {
             A modern MERN stack e-commerce platform offering quality products with seamless shopping experience.
           </p>
           <div className="social-links">
-            <a href="#" className="social-icon" title="GitHub">
+            <button className="social-icon" title="GitHub" aria-label="GitHub">
               <span>🔗</span>
-            </a>
-            <a href="#" className="social-icon" title="Twitter">
+            </button>
+            <button className="social-icon" title="Twitter" aria-label="Twitter">
               <span>🐦</span>
-            </a>
-            <a href="#" className="social-icon" title="LinkedIn">
+            </button>
+            <button className="social-icon" title="LinkedIn" aria-label="LinkedIn">
               <span>💼</span>
-            </a>
+            </button>
           </div>
         </div>
 
