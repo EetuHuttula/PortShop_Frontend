@@ -9,7 +9,7 @@ import Register from './pages/auth/Register';
 import Navbar from './components/Navbar';
 import TopBanner from './components/TopBanner';
 import { getCategories } from './services/categoryApi';
-import { getProducts, getProduct } from './services/productApi'; // Import getProduct
+import { getProducts } from './services/productApi'; // Import getProduct
 import ProductsPage from './pages/Front/ProductsPage';
 import ProductPage from './pages/productPage/ProductPage';
 import Cart from './pages/cart/Cart';

@@ -21,4 +21,6 @@ const register = async (userData) => {
   }
 };
 
-export default { register };
+const registerApi = { register };
+
+export default registerApi;
