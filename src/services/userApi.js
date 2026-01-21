@@ -29,4 +29,6 @@ export const deleteUser = async (userId) => {
   }
 };
 
-export default { getUsers, deleteUser };
+const userApi = { getUsers, deleteUser };
+
+export default userApi;

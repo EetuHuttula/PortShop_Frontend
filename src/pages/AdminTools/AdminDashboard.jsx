@@ -14,7 +14,6 @@ export default function AdminDashboard() {
   const [categories, setCategories] = useState([]);
   const [users, setUsers] = useState([]);
   const [filterSearch, setFilterSearch] = useState('');
-  const [filterCategory, setFilterCategory] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
@@ -114,8 +113,7 @@ export default function AdminDashboard() {
     return products.filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
                            product.description.toLowerCase().includes(filterSearch.toLowerCase());
-      const matchesCategory = filterCategory === '' || product.categoryId === parseInt(filterCategory);
-      return matchesSearch && matchesCategory;
+      return matchesSearch;
     });
   };
 
