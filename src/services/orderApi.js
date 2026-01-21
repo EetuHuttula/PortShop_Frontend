@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
 // Mock orders for demonstration
 const getMockOrders = () => [
@@ -36,7 +36,7 @@ const orderApi = {
   // Get all orders for current user
   getUserOrders: async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/orders`, {
+      const response = await fetch(`${API_URL}/orders`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -56,14 +56,23 @@ const orderApi = {
   // Get order by ID
   getOrderById: async (orderId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
+      const response = await fetch(`${API_URL}/orders/${orderId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
-      if (!response.ok) throw new Error('Failed to fetch order');
+      if (!response.ok) {
+        let errorMessage = 'Failed to fetch order';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorData.message || errorMessage;
+        } catch (parseError) {
+          errorMessage = response.statusText || `Server error (${response.status})`;
+        }
+        throw new Error(errorMessage);
+      }
       return await response.json();
     } catch (error) {
       console.error('Error fetching order:', error);
@@ -74,7 +83,7 @@ const orderApi = {
   // Create new order
   createOrder: async (orderData) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/orders`, {
+      const response = await fetch(`${API_URL}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,8 +92,15 @@ const orderApi = {
         body: JSON.stringify(orderData)
       });
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to create order');
+        let errorMessage = 'Failed to create order';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorData.message || errorMessage;
+        } catch (parseError) {
+          // If error response is not JSON, use status text or generic message
+          errorMessage = response.statusText || `Server error (${response.status})`;
+        }
+        throw new Error(errorMessage);
       }
       return await response.json();
     } catch (error) {
@@ -96,7 +112,7 @@ const orderApi = {
   // Update order status
   updateOrderStatus: async (orderId, status) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
+      const response = await fetch(`${API_URL}/orders/${orderId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -116,7 +132,7 @@ const orderApi = {
   // Update order (full update)
   updateOrder: async (orderId, orderData) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
+      const response = await fetch(`${API_URL}/orders/${orderId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +140,16 @@ const orderApi = {
         },
         body: JSON.stringify(orderData)
       });
-      if (!response.ok) throw new Error('Failed to update order');
+      if (!response.ok) {
+        let errorMessage = 'Failed to update order';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorData.message || errorMessage;
+        } catch (parseError) {
+          errorMessage = response.statusText || `Server error (${response.status})`;
+        }
+        throw new Error(errorMessage);
+      }
       return await response.json();
     } catch (error) {
       console.error('Error updating order:', error);
@@ -135,14 +160,23 @@ const orderApi = {
   // Delete order
   deleteOrder: async (orderId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
+      const response = await fetch(`${API_URL}/orders/${orderId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
-      if (!response.ok) throw new Error('Failed to delete order');
+      if (!response.ok) {
+        let errorMessage = 'Failed to delete order';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorData.message || errorMessage;
+        } catch (parseError) {
+          errorMessage = response.statusText || `Server error (${response.status})`;
+        }
+        throw new Error(errorMessage);
+      }
       return await response.json();
     } catch (error) {
       console.error('Error deleting order:', error);
@@ -153,14 +187,23 @@ const orderApi = {
   // Cancel order
   cancelOrder: async (orderId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/orders/${orderId}/cancel`, {
+      const response = await fetch(`${API_URL}/orders/${orderId}/cancel`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
-      if (!response.ok) throw new Error('Failed to cancel order');
+      if (!response.ok) {
+        let errorMessage = 'Failed to cancel order';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorData.message || errorMessage;
+        } catch (parseError) {
+          errorMessage = response.statusText || `Server error (${response.status})`;
+        }
+        throw new Error(errorMessage);
+      }
       return await response.json();
     } catch (error) {
       console.error('Error cancelling order:', error);

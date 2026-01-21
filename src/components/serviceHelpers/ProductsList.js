@@ -55,27 +55,55 @@ const ProductList = ({ products, onDeleteProduct, onUpdateProduct }) => {
 
   return (
     <div>
-      {/* Category buttons */}
-      <div>
-        <h3>Categories:</h3>
-        <div>
+      <div className="products-filters">
+        <h3>Filter by Category:</h3>
+        <div className="category-buttons">
+          <button 
+            className={`category-btn ${selectedCategory === '' ? 'active' : ''}`}
+            onClick={() => setSelectedCategory('')}
+          >
+            Show All
+          </button>
           {uniqueCategories.map(category => (
-            <button key={category} onClick={() => handleCategoryClick(category)}>
+            <button 
+              key={category} 
+              className={`category-btn ${selectedCategory === category ? 'active' : ''}`}
+              onClick={() => handleCategoryClick(category)}
+            >
               {category}
             </button>
           ))}
-          <button onClick={() => setSelectedCategory('')}>Show All</button>
         </div>
       </div>
 
-      {/* Product count and show all button */}
       <div className="product-summary">
-        <h2>Products List</h2>
-        <p>Count: {filteredProducts.length}</p>
-        <button className="btn btn-primary" onClick={handleShowProductListModal}>Show All Products</button>
+        <div className="summary-info">
+          <h3>Products Showing: <span className="count">{filteredProducts.length}</span></h3>
+        </div>
       </div>
 
-      {/* Product list modal */}
+      <div className="product-list">
+        <ul>
+          {filteredProducts.map((product) => (
+            <li key={product.id}>
+              <div>
+                <strong>Name:</strong> {product.name}
+              </div>
+              <div>
+                <strong>Description:</strong> {product.description}
+              </div>
+              <div>
+                <strong>Price:</strong> ${product.price}
+              </div>
+              <div>
+                <strong>Category:</strong> {product.category?.name}
+              </div>
+              <button className="btn btn-danger edit-button" onClick={() => onDeleteProduct(product.id)}>Delete</button>
+              <button className="btn btn-warning edit-button" onClick={() => handleShowEditModal(product)}>Edit</button>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className={`modal ${showProductListModal ? 'show' : ''}`} style={{ display: showProductListModal ? 'block' : 'none' }} tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">

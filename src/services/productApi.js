@@ -1,5 +1,3 @@
-// productApi.js
-
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -8,11 +6,7 @@ export const getProducts = async () => {
   try {
     const response = await axios.get(`${API_URL}/products`);
     const data = Array.isArray(response.data) ? response.data : response.data.data || [];
-    const productsWithImages = await Promise.all(data.map(async product => {
-      const imageUrl = product.imageUrl ? `${API_URL}/${product.imageUrl}` : null;
-      return { ...product, imageUrl };
-    }));
-    return productsWithImages;
+    return data;
   } catch (error) {
     console.error('Error fetching products:', error);
     throw error;

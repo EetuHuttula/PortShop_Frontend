@@ -53,8 +53,6 @@ const Checkout = () => {
       };
 
       console.log('Sending order data:', orderData);
-      console.log('Token:', localStorage.getItem('token'));
-
       // Create order in backend
       await orderApi.createOrder(orderData);
       toast.success('Order placed successfully!');

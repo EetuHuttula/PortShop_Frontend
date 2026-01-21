@@ -5,28 +5,31 @@ const AddProduct = ({ categories, onAddProduct }) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
-  const [image, setImage] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('description', description);
-    formData.append('price', price);
-    formData.append('category', category);
-    formData.append('image', image);
+    
+    if (!name || !description || !price || !category) {
+      alert('Please fill in all required fields');
+      return;
+    }
 
-    console.log('Submitting product:', formData);
-    onAddProduct(formData);
+    const productData = {
+      name,
+      description,
+      price: parseFloat(price),
+      categoryId: category
+    };
+
+    onAddProduct(productData);
     setName('');
     setDescription('');
     setPrice('');
     setCategory('');
-    setImage(null);
   };
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
+    <form onSubmit={handleSubmit}>
       <h2>Add New Product</h2>
       <div>
         <label>Name:</label>
@@ -64,20 +67,11 @@ const AddProduct = ({ categories, onAddProduct }) => {
         >
           <option value="">Select a category</option>
           {categories.map((cat) => (
-            <option key={cat._id} value={cat.id}>
+            <option key={cat.id} value={cat.id}>
               {cat.name}
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <label>Image:</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
-          className="admin-input"
-        />
       </div>
       <button type="submit" className="btn btn-primary">Add Product</button>
     </form>
