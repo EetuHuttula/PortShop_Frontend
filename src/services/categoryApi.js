@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export const getCategories = async () => {
   const response = await axios.get(`${API_URL}/categories`);
-  return response.data;
+  return Array.isArray(response.data) ? response.data : response.data.data || [];
 };
 
 export const getCategory = async (id) => {
