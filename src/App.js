@@ -7,6 +7,7 @@ import AdminPage from './pages/AdminTools/AdminDashboard';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import TopBanner from './components/TopBanner';
 import { getCategories } from './services/categoryApi';
 import { getProducts } from './services/productApi'; // Import getProduct
@@ -16,6 +17,9 @@ import Cart from './pages/cart/Cart';
 import Checkout from './pages/cart/Checkout';
 import Profile from './pages/profile/Profile';
 import OrderHistory from './pages/orders/OrderHistory';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import DataUsage from './pages/DataUsage';
 
 function App() {
   const [categories, setCategories] = useState([]);
@@ -101,8 +105,12 @@ function App() {
             <Route path="/products/:id" element={<ProductPage />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/data-usage" element={<DataUsage />} />
             <Route path="/" element={<ProductsPage products={products} categories={categories} />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </div>
     </CartProvider>
